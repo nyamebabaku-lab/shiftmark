@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">ShiftMark</string>
+    <string name="title_activity_main">ShiftMark</string>
+    <string name="package_name">com.shiftmark.worker</string>
+    <string name="custom_url_scheme">com.shiftmark.worker</string>
+    <string name="capacitor_background_geolocation_notification_channel_name">Auto clock-in</string>
+    <string name="capacitor_background_geolocation_notification_icon">drawable/ic_stat_shiftmark</string>
+    <string name="capacitor_background_geolocation_notification_color">#06B6D4</string>
+</resources>

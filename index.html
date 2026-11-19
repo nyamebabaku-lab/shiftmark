@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./icon.svg" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#0f172a" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="ShiftMark" />
+    <meta name="description" content="ShiftMark — automatic shift attendance: clocks you in at the office, tracks hours, overtime and pay." />
+    <title>ShiftMark</title>
+  </head>
+  <body class="bg-slate-50 dark:bg-ink-950">
+    <div id="root"></div>
+    <script>
+      setTimeout(function () {
+        var root = document.getElementById('root');
+        if (root && !root.children.length) {
+          root.innerHTML = '<div style="font-family:system-ui,sans-serif;max-width:420px;margin:15vh auto;padding:24px;text-align:center"><h1 style="font-size:20px">ShiftMark didn\'t start</h1><p style="color:#555;font-size:14px">Tap below to clear the saved copy and try again. If it still doesn\'t open, update your browser.</p><button id="sm-fix" style="padding:12px 18px;border:0;border-radius:12px;background:#0891b2;color:#fff;font-weight:600">Clear &amp; reload</button></div>';
+          document.getElementById('sm-fix').onclick = function () {
+            var done = function () { location.replace(location.href.split('#')[0]); };
+            try {
+              var r = indexedDB.open('nyamebabaku-apps', 1);
+              r.onupgradeneeded = function () { r.result.createObjectStore('kv'); };
+              r.onsuccess = function () { try { var t = r.result.transaction('kv', 'readwrite'), s = t.objectStore('kv'); s.getAllKeys().onsuccess = function (e) { e.target.result.forEach(function (k) { if (String(k).indexOf('shiftmark-') === 0) s.delete(k); }); }; t.oncomplete = done; t.onerror = done; } catch (x) { done(); } };
+              r.onerror = done;
+            } catch (e) { done(); }
+          };
+        }
+      }, 9000);
+    </script>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

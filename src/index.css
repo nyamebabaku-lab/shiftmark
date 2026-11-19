@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html { -webkit-tap-highlight-color: transparent; }
+body { @apply font-sans text-slate-800 antialiased dark:text-slate-100; overscroll-behavior-y: none; }
+input[type='date'], input[type='time'] { min-height: 2.75rem; }
+.dark input[type='date']::-webkit-calendar-picker-indicator, .dark input[type='time']::-webkit-calendar-picker-indicator { filter: invert(1); }
+.leaflet-container { font-family: inherit; }
